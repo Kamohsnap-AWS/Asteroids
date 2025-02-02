@@ -1,0 +1,4 @@
+# Git ignore list
+__pycache__/
+
+venv/
