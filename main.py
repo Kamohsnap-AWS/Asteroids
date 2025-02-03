@@ -26,8 +26,12 @@ def main():
                 return
         
         game_screen.fill("black")
-        player.draw(game_screen)
 
+        # Updates player model based on given inputs
+        player.update(dt)
+        # Draws player model on screen
+        player.draw(game_screen)
+        
 
         pygame.display.flip()
         
