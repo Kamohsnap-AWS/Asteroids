@@ -8,6 +8,7 @@ class Player(CircleShape):
         super().__init__(x, y, PLAYER_RADIUS)
 
         self.rotation = 0
+        self.shot_timer = 0
 
     # Returns a list of 3 coordinates that draw a triangle for use in draw method
     def triangle(self):
@@ -33,11 +34,20 @@ class Player(CircleShape):
     
     # Adds player ability to shoot    
     def shoot(self):
+        if self.shot_timer > 0:
+            return
+        
         current_shot = Shot(self.position.x, self.position.y, SHOT_RADIUS)
-        current_shot.velocity = pygame.Vector2(0, 1).rotate(self.rotation) * PLAYER_SHOOT_SPEED
+        current_shot.velocity = pygame.Vector2(0, 1).rotate(self.rotation) * PLAYER_SHOT_SPEED
+        # Adds cooldown everytime bullet is fired
+        self.shot_timer = PLAYER_SHOT_COOLDOWN
 
     # Updates the current player position on screen
     def update(self, dt):
+        
+        # Lowers the cooldown of our shot timer every update
+        if self.shot_timer > 0:
+            self.shot_timer -= dt
         keys = pygame.key.get_pressed()
 
         # Left rotate
