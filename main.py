@@ -6,6 +6,8 @@ os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame    
 # Asteroid game constants    
 from constants import *
+# Asteroid player class
+from player import *
 
 
 def main():
@@ -13,10 +15,8 @@ def main():
     game_screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     game_clock = pygame.time.Clock()
     dt = 0
-    
-    print(f"Starting asteroids!")
-    print(f"Screen width: {SCREEN_WIDTH}")
-    print(f"Screen height: {SCREEN_HEIGHT}")
+    x, y =  (SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2)
+    player = Player(x, y)
 
     # Infinite loop
     while True:
@@ -26,6 +26,9 @@ def main():
                 return
         
         game_screen.fill("black")
+        player.draw(game_screen)
+
+
         pygame.display.flip()
         
         # Limits framerate to 60 FPS
