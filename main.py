@@ -7,7 +7,11 @@ import pygame
 # Asteroid game constants    
 from constants import *
 # Asteroid player class
-from player import *
+from player import Player
+# Class that generates a single asteroid
+from asteroid import Asteroid
+# Class that generates astroid field
+from asteroidfield import AsteroidField
 
 
 def main():
@@ -16,13 +20,24 @@ def main():
     game_clock = pygame.time.Clock()
     dt = 0
 
-    # Creates updatable and drawable groups and adds Player class to them 
+    # Creates updatable, drawable and asteroids groups 
     updatables = pygame.sprite.Group()
     drawables = pygame.sprite.Group()
-    Player.containers = (updatables, drawables)
+    asteroids = pygame.sprite.Group()
 
+    # Adds Player class to both updatables and drawables groups
+    Player.containers = (updatables, drawables)
+    # Adds Asteroid class to updatables, drawables and asteroids groups
+    Asteroid.containers = (asteroids, updatables, drawables)
+    # Adds AsteroidField class to updatable group
+    AsteroidField.containers = (updatables)
+
+    # Initializes player object
     x, y =  (SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2)
     player = Player(x, y)
+
+    # Intitialized asteroid field object
+    asteroid_field = AsteroidField()
 
     
 
