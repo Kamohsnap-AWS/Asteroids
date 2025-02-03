@@ -12,6 +12,8 @@ from player import Player
 from asteroid import Asteroid
 # Class that generates astroid field
 from asteroidfield import AsteroidField
+# Class that generates player shots
+from shot import Shot
 
 
 def main():
@@ -20,17 +22,20 @@ def main():
     game_clock = pygame.time.Clock()
     dt = 0
 
-    # Creates updatable, drawable and asteroids groups 
+    # Creates updatable, drawable, asteroids, shots groups 
     updatables = pygame.sprite.Group()
     drawables = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
+    shots = pygame.sprite.Group()
 
     # Adds Player class to both updatables and drawables groups
     Player.containers = (updatables, drawables)
     # Adds Asteroid class to updatables, drawables and asteroids groups
     Asteroid.containers = (asteroids, updatables, drawables)
-    # Adds AsteroidField class to updatable group
+    # Adds AsteroidField class to updatables group
     AsteroidField.containers = (updatables)
+    # Adds Shot class to shots, updatables, drawables group
+    Shot.containers = (shots, updatables, drawables)
 
     # Initializes player object
     x, y =  (SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2)
@@ -38,8 +43,6 @@ def main():
 
     # Intitialized asteroid field object
     asteroid_field = AsteroidField()
-
-    
 
     # Infinite loop
     while True:
