@@ -1,10 +1,9 @@
 import pygame
 import random
 
+from constants import *
 # Class that generates an individual asteroid
 from asteroid import Asteroid
-from constants import *
-
 
 class AsteroidField(pygame.sprite.Sprite):
     edges = [
